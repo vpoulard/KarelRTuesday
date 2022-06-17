@@ -4,25 +4,23 @@
 
 $graphical = true
 
-require_relative "beeper_panier"
+require_relative "maison"
 require_relative "../karel/robota"
 
-# a task for a stair sweeper
+# a task for a maison
 def task()
   world = Robota::World
-  world.read_world("../worlds/panier")
+  world.read_world("../worlds/maison.kwld")
   
-  karel = FixBeepers.new(1, 6, Robota::EAST, 0) 
-  karel.turn_around
-  karel.move_3
+  karel = Maison.new(1, 3, Robota::NORTH, 16) 
+  karel.put_5_beeper
   karel.turn_right
-  karel.move_3
-  karel.move
-  karel.move
+  karel.put_4_beeper
+  karel.turn_right
+  karel.put_4_beeper
+  karel.turn_right
+  karel.put_3_beeper
 
-
-
- 
 end
 
 if __FILE__ == $0
@@ -30,8 +28,8 @@ if __FILE__ == $0
      screen = window(8, 40) # (size, speed)
      screen.run do
        task
-    end
-   else
-     task
-   end
+     end
+  else
+   task
+  end
 end
